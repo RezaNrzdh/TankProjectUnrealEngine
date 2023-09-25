@@ -38,4 +38,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, category="Component")
 	class USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditAnywhere)
+	class UNiagaraSystem* DestrcutionEffect;
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* FireSound;
 };

@@ -17,6 +17,11 @@ public:
 	float MaxHealth = 100.f;
 	float Health = 0.f;
 
+	class ATank* Tank;
+
+	UFUNCTION()
+	float TestFunc();
+
 protected:
 	virtual void BeginPlay() override;
 

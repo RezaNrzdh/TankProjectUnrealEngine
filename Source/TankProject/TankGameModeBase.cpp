@@ -23,6 +23,7 @@ void ATankGameModeBase::HandleGameStart()
 	TankPlayerController = Cast<ATankPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 	
 	StartGame();
+	UGameplayStatics::PlaySound2D(this, BattleSound);
 	
 	if(TankPlayerController)
 	{

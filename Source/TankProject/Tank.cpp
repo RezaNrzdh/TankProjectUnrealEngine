@@ -48,6 +48,8 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 
+
+
 void ATank::Move(float value)
 {   
     FVector offset = FVector(0,0,0);
@@ -84,6 +86,10 @@ void ATank::HandleDestruction()
     Super::HandleDestruction();
     SetActorHiddenInGame(true);
     SetActorTickEnabled(false);
+    
+    UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+
+    bTankAlive = false;
 }
 
 
@@ -92,3 +98,32 @@ APlayerController* ATank::GetPlayerControllerRef() const
 {
     return PlayerControllerRef;
 }
+
+
+
+void ATank::GetCurrentHealth(float Health)
+{
+    CurrentHealthVar = Health;
+}
+
+
+
+float ATank::CurrentHealth()
+{
+    return CurrentHealthVar;
+}
+
+
+
+bool ATank::GetTankAlive()
+{
+    return bTankAlive;
+}
+
+
+void ATank::Fire()
+{
+    Super::Fire();
+}
+
+

@@ -12,17 +12,29 @@ class TANKPROJECT_API ATower : public ABasicPawn
 public:
 	ATower();
 	virtual void Tick(float DeltaTime) override;
-
 	void HandleDestruction();
 	
 protected:
 	virtual void BeginPlay() override;
 
 private:
-	class ATank* Tank;
-
-	FTimerHandle FireRateTimerHandle;
-	float FireRate = 3.f;
 	void CheckFireCondition();
 	bool InFireRange();
+	bool CheckSweeping();
+
+public:
+	UPROPERTY(EditAnywhere)
+	float FireRate = 1.f;
+
+protected:
+
+private:
+	UPROPERTY(EditAnywhere)
+	class USoundBase* ExplosionSound;
+	
+	class ATank* Tank;
+	FTimerHandle FireRateTimerHandle;
+	float ShapeRadiusSize = 10.f;
+	float MaxDistance = 4000.f;
+	bool canWeSeeTank = false;
 };

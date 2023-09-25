@@ -36,4 +36,7 @@ private:
 
 	int32 EnemyCount = 0;
 	int32 GetEnemyCount();
+
+	UPROPERTY(EditAnywhere)
+	class USoundBase* BattleSound;
 };

@@ -11,22 +11,35 @@ class TANKPROJECT_API ATank : public ABasicPawn
 	GENERATED_BODY()
 
 public:
-	ATank();
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	virtual void Tick(float DeltaTime) override;
-
-	void HandleDestruction();
+	UFUNCTION(BlueprintCallable)
+	float CurrentHealth();
 	
-	APlayerController* GetPlayerControllerRef() const;
+	ATank();
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void Tick(float DeltaTime) override;
+	void HandleDestruction();
+	void GetCurrentHealth(float Health);
+	bool GetTankAlive();
+	void Fire();
 
 protected:
 	virtual void BeginPlay() override;
-
 	void RotateTurret(FVector TargetLocation);
 
 private:
+	void Move(float value);
+	void Turn(float value);
+
+public:
+	float CurrentHealthVar;
+	APlayerController* GetPlayerControllerRef() const;
+
+protected:
+
+private:
+	UPROPERTY(EditAnywhere)
+	class USoundBase* HitSound;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 	float Speed = 1000.f;
 
@@ -41,7 +54,5 @@ private:
 
 	class APlayerController* PlayerControllerRef;
 
-	void Move(float value);
-
-	void Turn(float value);
+	bool bTankAlive = true;
 };

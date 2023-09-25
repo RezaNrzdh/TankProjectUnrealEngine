@@ -2,9 +2,12 @@
 
 
 #include "BasicPawn.h"
+
+#include "NiagaraFunctionLibrary.h"
 #include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 ABasicPawn::ABasicPawn()
@@ -36,6 +39,7 @@ void ABasicPawn::Tick(float DeltaTime)
 void ABasicPawn::HandleDestruction()
 {
 	//Visual/Sound Effects
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, DestrcutionEffect, GetActorLocation(), GetActorRotation());
 }
 
 
@@ -45,8 +49,10 @@ void ABasicPawn::Fire()
 	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
 
-	DrawDebugSphere(GetWorld(), Location, 50.f, 12.f, FColor::Red, false, 3.f);
+	//DrawDebugSphere(GetWorld(), Location, 50.f, 12.f, FColor::Red, false, 3.f);
 
 	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjecstileClass, Location, Rotation);
 	Projectile->SetOwner(this);
+
+	UGameplayStatics::PlaySoundAtLocation(this, FireSound, GetActorLocation());
 }

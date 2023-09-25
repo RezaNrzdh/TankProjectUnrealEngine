@@ -29,5 +29,14 @@ private:
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	UPROPERTY(EditAnywhere)
+	class UNiagaraSystem* Niagara;
+
+	UPROPERTY(VisibleAnywhere)
+	class UNiagaraComponent* NiagaraComponent;
+	
+	UPROPERTY(EditAnywhere)
 	float Damage = 50.f;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
 };
